@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import Home from './Home';
+import DetailCollection from './DetailCollection'
+import {
+  StackNavigator
+} from 'react-navigation'
 
-class Wrapper extends Component {
-  render(){
-    return (
-      <Home />
-    )
-  }
-}
-
+const Wrapper = StackNavigator({
+  Main: {screen: Home},
+  Detail: {screen: DetailCollection}
+})
 export default Wrapper

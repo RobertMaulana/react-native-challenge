@@ -1,4 +1,4 @@
-package com.uberclone;
+package com.zomaclone;
 
 import android.app.Application;
 

@@ -8,7 +8,7 @@ import React, { Component } from 'react';
 import {AppRegistry, registerComponent} from 'react-native'
 import App from './src/App'
 
-export default class uberclone extends Component {
+export default class zomaclone extends Component {
   render() {
     return (
       <App/>
@@ -16,4 +16,5 @@ export default class uberclone extends Component {
   }
 }
 
-AppRegistry.registerComponent('uberclone', () => uberclone);
+
+AppRegistry.registerComponent('zomaclone', () => zomaclone);

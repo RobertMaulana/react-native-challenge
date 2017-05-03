@@ -1,12 +1,8 @@
-import React, {Component} from 'react'
-import Wrapper from './components/Wrapper'
+import React from 'react';
+import Wrapper from './components/Wrapper';
 
-class App extends Component {
-  render(){
-    return (
-      <Wrapper/>
-    )
-  }
-}
+const App = () => (
+  <Wrapper />
+)
 
 export default App
