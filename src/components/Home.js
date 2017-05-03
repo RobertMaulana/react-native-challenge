@@ -7,6 +7,9 @@ import {
 } from 'react-native'
 import axios from 'axios'
 import { Container, Content, List, ListItem, Thumbnail, Text, Body, Left, Icon, Spinner } from 'native-base';
+import { connect } from 'react-redux'
+
+import { fetchCollections } from '../actions'
 
 class Home extends Component {
   static navigationOptions = {
@@ -15,28 +18,30 @@ class Home extends Component {
   constructor(props){
     super(props)
     this.state = {
-      restaurants: []
+      collections: []
     }
   }
 
   componentDidMount(){
-    let self = this
-    axios.get('https://developers.zomato.com/api/v2.1/collections?city_id=1&count=50', {headers: {"user-key": "ec774bd6f296b71e5ff539dadf4232d8"}})
-    .then(function (response) {
-      self.setState({restaurants: response.data.collections})
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    // let self = this
+    // axios.get('https://developers.zomato.com/api/v2.1/collections?city_id=1&count=50', {headers: {"user-key": "ec774bd6f296b71e5ff539dadf4232d8"}})
+    // .then(function (response) {
+    //   self.setState({restaurants: response.data.collections})
+    // })
+    // .catch(function (error) {
+    //   console.log(error);
+    // });
+    this.props.fetchCollections()
   }
 
   render(){
     const { navigate } = this.props.navigation;
     const { headerStyle, textStyle, titleStyle, titleStyleAlignment } = styles
+    const { collections } = this.props
 
     return (
       <Container>
-      { this.state.restaurants.length === 0 && <Container>
+      { collections.length === 0 && <Container>
         <Content>
           <Spinner color='orange' />
         </Content>
@@ -45,17 +50,17 @@ class Home extends Component {
        <Content>
          <ScrollView>
            <List>
-         {this.state.restaurants.map((restaurant) => {
+         {collections.map((collection) => {
            return (
             <TouchableOpacity
-              key={restaurant.collection.collection_id}
-              onPress={() => navigate('Detail', restaurant)}
+              key={collection.collection.collection_id}
+              onPress={() => navigate('Detail', collection)}
               style={{flexDirection: 'row', marginBottom: 5, borderBottomWidth: 1, paddingBottom: 5, borderBottomColor: '#d0d4db'}}
             >
-              <Thumbnail square size={80} source={{uri: restaurant.collection.image_url}} />
+              <Thumbnail square size={80} source={{uri: collection.collection.image_url}} />
                 <Body style={{paddingLeft: 7, alignItems: 'flex-start'}}>
-                  <Text>{restaurant.collection.title}</Text>
-                  <Text note style={{fontSize: 12}}>{restaurant.collection.description}</Text>
+                  <Text>{collection.collection.title}</Text>
+                  <Text note style={{fontSize: 12}}>{collection.collection.description}</Text>
               </Body>
             </TouchableOpacity>
          )
@@ -94,5 +99,12 @@ const styles = {
   }
 }
 
+const mapDispatchToProps = dispatch => ({
+  fetchCollections: () => dispatch(fetchCollections())
+})
 
-export default Home
+const mapStateToProps = state => ({
+  collections: state.collections
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home)
