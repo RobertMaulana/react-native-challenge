@@ -1,0 +1,8 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Collection action should run get action 1`] = `
+Object {
+  "payload": 1000,
+  "type": "GET_COLLECTIONS",
+}
+`;

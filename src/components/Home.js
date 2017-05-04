@@ -6,12 +6,12 @@ import {
     TouchableOpacity
 } from 'react-native'
 import axios from 'axios'
-import { Container, Content, List, ListItem, Thumbnail, Text, Body, Left, Icon, Spinner } from 'native-base';
+import { Container, Content, List, Thumbnail, Text, Body, Spinner } from 'native-base';
 import { connect } from 'react-redux'
 
 import { fetchCollections } from '../actions'
 
-class Home extends Component {
+export class Home extends Component {
   static navigationOptions = {
     title: 'Zomato Collections',
   };
@@ -23,14 +23,6 @@ class Home extends Component {
   }
 
   componentDidMount(){
-    // let self = this
-    // axios.get('https://developers.zomato.com/api/v2.1/collections?city_id=1&count=50', {headers: {"user-key": "ec774bd6f296b71e5ff539dadf4232d8"}})
-    // .then(function (response) {
-    //   self.setState({restaurants: response.data.collections})
-    // })
-    // .catch(function (error) {
-    //   console.log(error);
-    // });
     this.props.fetchCollections()
   }
 
@@ -50,22 +42,22 @@ class Home extends Component {
        <Content>
          <ScrollView>
            <List>
-         {collections.map((collection) => {
-           return (
-            <TouchableOpacity
-              key={collection.collection.collection_id}
-              onPress={() => navigate('Detail', collection)}
-              style={{flexDirection: 'row', marginBottom: 5, borderBottomWidth: 1, paddingBottom: 5, borderBottomColor: '#d0d4db'}}
-            >
-              <Thumbnail square size={80} source={{uri: collection.collection.image_url}} />
-                <Body style={{paddingLeft: 7, alignItems: 'flex-start'}}>
-                  <Text>{collection.collection.title}</Text>
-                  <Text note style={{fontSize: 12}}>{collection.collection.description}</Text>
-              </Body>
-            </TouchableOpacity>
-         )
-         })}
-      </List>
+             {collections.map((collection) => {
+               return (
+                <TouchableOpacity
+                  key={collection.collection.collection_id}
+                  onPress={() => navigate('Detail', collection)}
+                  style={{flexDirection: 'row', marginBottom: 5, borderBottomWidth: 1, paddingBottom: 5, borderBottomColor: '#d0d4db'}}
+                >
+                  <Thumbnail square size={80} source={{uri: collection.collection.image_url}} />
+                    <Body style={{paddingLeft: 7, alignItems: 'flex-start'}}>
+                      <Text>{collection.collection.title}</Text>
+                      <Text note style={{fontSize: 12}}>{collection.collection.description}</Text>
+                  </Body>
+                </TouchableOpacity>
+             )
+             })}
+          </List>
          </ScrollView>
 
        </Content>

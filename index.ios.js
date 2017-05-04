@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import {AppRegistry, registerComponent} from 'react-native'
+import React, { Component } from 'react'
+import {AppRegistry} from 'react-native'
 import { Provider } from 'react-redux'
 
 import store from './src/store'
@@ -11,9 +11,8 @@ export default class zomaclone extends Component {
       <Provider store={store}>
         <App/>
       </Provider>
-    );
+    )
   }
 }
 
-
-AppRegistry.registerComponent('zomaclone', () => zomaclone);
+AppRegistry.registerComponent('zomaclone', () => zomaclone)
